@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}My Account {% endblock %}
+{% block content %}
+    <h1 class="title">My Account</h1>
+    <h1 class="user-info">Welcome, {{ user.username }}</h1>
+    <form method="POST" action="{% url 'logout' %}" class="btn-logout">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+        
+    </form>
+{% endblock %}

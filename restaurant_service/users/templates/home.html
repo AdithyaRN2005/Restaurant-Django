@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title  %}Home{% endblock %}
+{% block content %}
+
+    <!-- home Start -->
+
+    <main id="home">
+        <div class="container">
+            <div class="content">
+                <h2>Fast and yummy.</h2>
+                <h3>Good for your tummy.</h3>
+                <div class="cta-container">
+                    <a href="{% url 'login' %}" class="btn">Log In</a>
+                    <p>Are you a new user? <a href="{% url 'signup' %}">Click here!</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- home Close -->{% endblock %}

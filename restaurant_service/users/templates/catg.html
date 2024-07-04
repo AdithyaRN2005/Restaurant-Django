@@ -1,0 +1,7 @@
+<div class="btn_container">
+    <a href="{% url 'menu' %}" class="btn-cat active_btn" >All Dishes</a>
+    {% for category in categories %}
+    <a href="{% url 'category_detail' category.slug %}" class="btn-cat" >{{category.title}}</a>
+    {% endfor %}
+
+</div>

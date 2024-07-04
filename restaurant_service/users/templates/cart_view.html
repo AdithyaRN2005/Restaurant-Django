@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Cart {% endblock %}
+{% block content %}
+    <h1 class="title">Cart</h1>
+    <div class="cart_items_container">
+        {% if cart %}
+        {% for each_item in cart %}
+            <div class="cart_img_cards">
+                {% if each_item.item.image %}
+                <img src="{{each_item.item.image.url}}" alt="Image">   
+                {% endif %}
+                <p><b>Title:</b>{{each_item.item.title}}</p>
+                <p><b>Unit Price:</b>{{each_item.item.price}}</p>
+                <p><b>Quantity:</b><a class="qty-chng" href="{% url 'change_quantity' each_item.item.id %}?action=increase"> + </a>
+                {{each_item.quantity}}
+                <a class="qty-chng" href="{% url 'change_quantity' each_item.item.id %}?action=decrease"> -</a></p>
+                
+                <p><a class="qty-chng" href="{% url 'remove_from_cart' each_item.item.id %}">Remove</a>    </p>     
+            </div>
+
+        {% endfor %}
+        {% else %}
+            <p class="cart-text">You have no items in your cart!!!</p>
+        {% endif %}
+
+    <div class="total_cost">
+    <strong>Total Cost: </strong> Rs.{{cart.get_total_cost}}/-
+</div>
+</div>
+{% endblock %}

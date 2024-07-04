@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}|Restaurant</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="{% static 'script.js' %}"></script>
+
+</head>
+
+<body>
+    <!-- Header Start -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" alt="logo"></a>
+                </div>
+                <nav>
+                    
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'menu' %}">Menu</a></li>
+                    <li><a href="{% url 'cart_view' %}">My Cart</a></li>
+                    {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'myaccount' %}">My account</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+    
+                </nav>
+
+            </div>
+        </div>
+    </header>
+    <!-- Header Close -->
+    <div class="main-content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    
+
+</body>
+</html>
