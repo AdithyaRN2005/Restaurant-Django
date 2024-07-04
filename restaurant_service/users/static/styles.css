@@ -481,3 +481,116 @@ ul {
     color: #ffffff; /* Bullet color */
     padding-left: 20px; /* Adjust the padding for indentation */
 }
+
+
+
+
+/* ######### RESPONSIVE CSS ########## */
+/* Medium devices (landscape tablets, 768px and up) */
+@media (max-width: 992px) {
+    #home .content h2{
+        font-size: 4rem;
+}
+    #home .content h3{
+        font-size: 2rem;
+    }
+
+    .search{
+        position: absolute;
+        left: 37%;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+
+@media (max-width: 768px) {
+    #home .content h2{
+        font-size: 3.5rem;
+}
+    #home .content h3{
+        font-size: 1.5rem;
+    }
+
+    .search{
+        position: absolute;
+        left: 37%;
+    }
+    h1.title{
+        font-size: 25px;
+    }
+    .about-section p{
+        font-size: 17px;
+    }
+    .menu_items_container{
+        grid-template-columns: repeat(2,1fr);
+    }
+    
+
+}
+
+/* Extra small devices (phones, 600px and down) */
+
+@media (max-width: 600px) {
+    html{
+        font-size: 55%;
+    }
+    .container{
+        padding: 0 40px;
+    }
+    
+    .btn{
+        display: block;
+    }
+    .navbar nav{
+        flex-direction: column;
+        min-width: 100%;
+        min-height: 60vh;
+        position: fixed;
+        top: 0;
+        right: 100%;
+        background: #000;
+        align-items: flex-start;
+        justify-content: center;
+        transition: all 0.5s ease-in-out;
+    }
+    nav.active{
+        right: 0%;
+        transition: all 1s ease-in ;
+    }
+    .navbar nav li{
+        margin: 2rem 4rem;
+    }
+    .navbar nav li a {
+        font-size: 1.4rem;
+        color: var(--white_color);
+        position: relative;
+    }
+
+    .close-btn{
+        position: absolute;
+        top: 0;
+        left: 80%;
+        margin: 25px;
+    }
+
+    .search{
+        position: absolute;
+        left: 26%;
+        width: 70%;
+    }
+    .search form input{
+        width: 50%;
+    }
+    
+    .search form button{
+        width: 32%;
+    }
+
+    .menu_items_container{
+        grid-template-columns: repeat(1,1fr);
+    }
+    
+    
+
+}
+
