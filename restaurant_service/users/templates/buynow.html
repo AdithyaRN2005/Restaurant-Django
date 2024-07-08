@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}Buy Now {% endblock %}
+{% block content %}
+
+<h1 class="title">Order Review</h1>
+<div class="review-container">
+        <table class="order-review">
+            <thead>
+                <tr>
+                    <th>Sl. No.</th>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total Price.</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for each_item in cart %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{each_item.item.title}}</td>
+                    <td>{{each_item.quantity}}</td>
+                    <td>{{each_item.item.price}}</td>
+                    <td>{{each_item.total_price }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="total_cost">
+            <strong>Total Amount: </strong> Rs.{{cart.get_total_cost}}/-
+        </div>
+</div>
+<div class="form-container">
+    <h1>Billing Details</h1>
+    <form method="post" action=".">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div>
+            {{ form.first_name.label_tag }} {{ form.first_name }}
+        </div>
+        <div>
+            {{ form.last_name.label_tag }} {{ form.last_name }}
+        </div>
+        <div>
+            {{ form.phone.label_tag }} {{ form.phone }}
+        </div>
+        <div>
+            {{ form.email.label_tag }} {{ form.email }}
+        </div>
+        <div class="form-address">
+            <!-- {{ form.address_id.label_tag }} -->
+            <p class="heading">Address: </p>
+            {% for radio in form.address_id %}
+                <div>
+                    {{ radio.tag }} {{ radio.choice_label }}
+                </div>
+            {% endfor %}
+                <div class="info">
+                    Different Billing Address? <br>
+                    Go to <a href="{% url 'myaccount' %}">My Account</a> to add new address!
+                </div>
+        </div>
+        <button type="submit" class="submit-btn">Checkout</button>
+    </form>
+    
+</div>
+
+
+
+{% endblock %}

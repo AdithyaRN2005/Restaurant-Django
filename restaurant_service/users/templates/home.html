@@ -11,8 +11,13 @@
                 <h2>Fast and yummy.</h2>
                 <h3>Good for your tummy.</h3>
                 <div class="cta-container">
+                    {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'menu' %}" class="menu-btn">View Menu</a></li>
+                    {% else %}
                     <a href="{% url 'login' %}" class="btn">Log In</a>
                     <p>Are you a new user? <a href="{% url 'signup' %}">Click here!</a></p>
+                    {% endif %}
+                    
                 </div>
             </div>
         </div>

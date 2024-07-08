@@ -1,0 +1,148 @@
+Final Task: Enhancing the Restaurant Service Website
+Problem Statement: Building upon the previous task of creating a restaurant service
+website, you are now required to enhance the website with user profile functionality and
+order history. Implement these features using Django. Additionally, introduce new features
+to the menu page, order summary page, confirmation page, add to cart page, and user
+profile page.
+
+
+Detailed Requirements:
+
+Menu Page Enhancements:
+    ● Search Bar: Retain the search bar functionality for users to search for specific menu items.
+    ● Add to Order: Allow authenticated users to add items to their order.
+    ● Dynamic Order Summary: Implement a dynamic update to the order summary, showing the list of items,
+    their quantity, and individual amounts.
+    ● Adjust Quantity: Provide options for users to adjust the quantity of an item or delete an item from the order
+    list.
+
+Order Summary Page:
+    ● Review Items: Create an order summary page where users can review their selected items.
+    ● Display Details: Display the list of items, their quantity, and individual amounts.
+    ● Total Amount: Calculate and show the total order amount.
+    ● Modify Order: Enable users to make changes to the quantity of an item or remove items from the order list.
+
+Confirmation Page:
+    ● Confirm Order: After reviewing the order on the order summary page, allow users to confirm their order.
+    ● Acknowledgement: Create a confirmation page to acknowledge the successful placement of the order.
+    ● Order History: When the user confirms the order, add the order details to the user's order history.
+
+User Profile Page:
+    ● Personal Details: Design and implement a user profile page where users can view their personal details,
+    including username, email, and other relevant information stored during signup.
+    ● Edit Profile (Optional): Allow users to edit their profile information.
+    ● Order History: Display the user's order history, including past orders with details such as order date, items,
+    quantities, and total amounts.
+
+Requirements and Constraints:
+
+Technological Constraints:
+    ● Use Django for the backend.
+    ● Implement user profile and order history functionalities using Django models and views.
+    ● Use Django's built-in authentication system for managing user accounts.
+    ● Use HTML, CSS, and JavaScript for designing the pages and adding interactivity.
+
+Design Constraints:
+    ● Ensure the website maintains a consistent and user-friendly design.
+    ● The website should be responsive and work well on different devices.
+
+Performance Constraints:
+    ● Optimize database queries to ensure efficient loading of pages and updates to the order summary.
+    ● Implement proper session management for authenticated users.
+
+    Security Constraints:
+    ● Use Django’s built-in security features to protect against common vulnerabilities.
+    ● Validate and sanitize user inputs on all pages to prevent security issues.
+
+Task Description:
+1. User Profile and Order Models:
+DONE    ○ Create a UserProfile model to store user details.
+DONE    ○ Create an Order model to store order details, with a relationship to the user and menu items.
+2. Menu Page Enhancements:
+    ○ Implement a dynamic order summary using JavaScript.
+    ○ Allow users to adjust quantities and remove items from the order list.
+3. Order Summary Page:
+DONE    ○ Display the list of selected items, their quantities, individual amounts, and total amount.
+    ○ Allow users to make changes to the order.
+4. Confirmation Page:
+DONE    ○ Create a confirmation page to acknowledge the successful placement of an order.
+DONE    ○ Add order details to the user's order history upon confirmation.
+5. User Profile Page:
+DONE    ○ Display the user's personal details and order history.
+DONE    ○ (Optional) Allow users to edit their profile information.
+6. Testing:
+    ○ Test all new functionalities to ensure they work correctly.
+    ○ Verify that user authentication and order management features are functioning as expected.
+Deadline:
+The deadline for this task is 9 July 2024.
+If you have any questions or need any help, don’t hesitate to ask. We are here to support each other. Happy coding!
+
+
+
+TO DO:
+
+
+DONE Add BuyNow Button in my cart
+DONE Proceed to Review page
+DONE Show address
+DONE Confirmation/Success Page
+    -DONE Confirm Button
+    -DONE Order recorded in class Order
+    -DONE Clear cart
+    -DONE Show message
+    -DONE Redirect to myaccount
+DONE  Dynamic Cartlength
+DONE -Correct Sl.No. in Order Review TABLE
+DONE -Display Calculted value in each item total price
+DONE -UserProfile edit view
+DONE-Create address section
+    DONE-Fetch dynamically from database
+    DONE-Display as radio buttons
+    DONE-add new address
+DONE-Create Order History
+    -DONE Create Order_history.HTML
+    -DONE Show recent 3 order in my_account
+DONE If item already in cart, increment quantity
+DONE-Choose address from radio buttons
+
+
+DONE -If logged in, hide signing options in home, add view menu button
+ ...NEED TO LEARN AJAX ... -Use JS to add products to the cart    
+...VERY DIFFICULT... -If item in cart, show quantity in cart.   
+...VERY DIFFICULT... -Allow user to modify item quantity from menupage itself for items in cart   
+-Styling buy-now page
+    -Style Order Review TABLE
+    -Add quantity modify option in quantity column
+    -Style contact details and address radio buttons in checkoutform
+-My Account 
+    -Show succes shopping message in green shade with a close button
+    -Modify order id as link to see order history
+    -Use JS to hide and show all buttons and forms whenever required
+    -Style entire page
+    
+
+
+Add ons:
+Add product using JS
+
+
+
+
+
+STYLING
+-ORDER REVIEW 
+    -TABLE
+    -FORMS
+    -Button
+
+
+
+
+RELATIONSSSSS
+
+USER 1---1 UserProfile
+USER 1---+ ORDER
+ORDER 1---+ ITEM
+ITEM +---+ cATEGORIES
+
+USER 1---1 UserProfile 1---+ ORDER +---+ITEMS

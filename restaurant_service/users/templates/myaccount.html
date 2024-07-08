@@ -1,11 +1,103 @@
 {% extends 'base.html' %}
-{% block title %}My Account {% endblock %}
+
+{% block title %}My Account{% endblock %}
+
 {% block content %}
-    <h1 class="title">My Account</h1>
-    <h1 class="user-info">Welcome, {{ user.username }}</h1>
-    <form method="POST" action="{% url 'logout' %}" class="btn-logout">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
+<div class="account-container">
+    <h1 class="account-title">My Account</h1>
+    <h1 class="user-info">Welcome, {{ user.user }}</h1>
+
+    {% if success_message %}
+        <div class="message success-message">{{ success_message }}</div>
+    {% endif %}
+
+    {% if order %}
+        <div class="order-info">
+            Thank you for shopping. 
+            <p><strong>Order ID:</strong> {{ order.id }}</p>
+            <p><strong>Bill Amount:</strong> {{ order.total_bill }}</p>
+        </div>
+    {% endif %}
+
+    <div class="profile-section">
+        <div>
+        <h2>My Profile</h2>
+        </div>
+        <div class="profile-details">
+            <p><strong>First Name:</strong> {{ user.first_name }}</p>
+            <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+            <p><strong>Phone:</strong> {{ user.phone }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <button type="button" class="btn edit-profile-btn">Edit Profile</button>
+        </div>
         
+        <form id="edit-profile-form" method="POST" action=".">
+            {% csrf_token %}
+            {{ edit_prof_form.as_p }}
+            <button class="btn save-profile-btn" type="submit">Save</button>
+        </form> 
+    </div>
+
+    <div class="address-section">
+        {% if addresses %}
+        <h2>Address</h2> <hr>
+        {% for address in addresses %}
+        <div class="address">
+            {{address.name}}, <br>
+            {{address.housename}},
+            {{address.place}},<br>
+            {{address.postoffice}},
+            PinCode:{{address.pincode}}<br>
+            District:{{address.district}},
+            State:{{address.state}}<br>
+            <b>Ph: {{address.mob}}</b>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <!-- <a href="{% url 'add-address' %}" class="btn add-address-btn">Add Address</a> -->
+        <button type="button" onclick="location.href='{% url 'add-address' %}'" class="btn add-address-form-btn">Add Address</button>
+
+
+        <form id="add-address-form"  method="POST" action="{% url 'add-address' %}">
+            {% csrf_token %}
+            {{ add_address_form.as_p }}
+            <button class="btn add-address-btn" type="submit">Add</button>
+            <a href="{% url 'myaccount' %}" class="btn add-address-btn">Back</a>
+
+        </form> 
+    </div>
+
+    <div class="order-history">
+        <a href="{% url 'order_history' %}" class="order-history-title"><h2>Order History</h2></a>
+        {% if order_records %}
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Sl. No.</th>
+                        <th>Order ID</th>
+                        <th>Total Item(s)</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in order_records %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td><a href="{% url 'order_details' order.id %}">#{{ order.id }}</a></td>
+                            <td>{{ order.items.count }}</td>
+                            <td>{{ order.total_bill }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-orders">No orders found.</p>
+        {% endif %}
+    </div>
+
+    <form method="POST" action="{% url 'logout' %}" class="logout-form">
+        {% csrf_token %}
+        <button type="submit" class="btn logout-btn">Logout</button>
     </form>
+</div>
 {% endblock %}

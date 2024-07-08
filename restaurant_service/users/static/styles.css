@@ -126,7 +126,7 @@ header{
     top: 30px;
 }
 
-.btn{
+.header-btn{
     font-size: 2.2rem;
     color: var(--white_color);
     cursor: pointer;
@@ -257,6 +257,7 @@ header{
 }
 
 .menu-content {
+    height: 100%;
     padding-top: 100px;
     background: url('img/bg-menu.png') no-repeat center/cover; 
 }
@@ -371,6 +372,7 @@ h1.title{
 
 .qty-chng{
     color: #000;
+    display: inline-block;
 }
 
 .total_cost{
@@ -387,23 +389,62 @@ h1.title{
 .main-content {
     background: url('img/bg-menu.png') center/cover; 
     height: 100vh;
+
+    justify-content: center;
+    align-items: center;
     /* background-color: var(--primary_color);
     min-height: 100vh;
     position: relative;
      z-index: -10; */
 }
 
+.menu-btn{
+    width: 80px;
+    padding: 10px;
+    margin-left: 10rem;
+    font-size: 1em;
+    color: #fff;
+    background-color: rgba(0,0,0,0.6);
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+}
+#home .menu-btn{
+    margin: 0;
+    transition: all 0.5s ease-in-out;
 
+}
+
+#home .menu-btn:hover{
+    background: var(--primary_color);
+    color: #000;
+    font-weight: 900;
+    border: 2px solid black;
+}
+
+
+
+
+.buynow-btn{
+    width: 80px;
+    text-align: center;
+
+    padding: 10px;
+    margin-left: 45%;
+    font-size: 1em;
+    color: #fff;
+    background-color: rgba(0,0,0,0.6);
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
 /* CART Ends  */
 
 
 /* My Account */
-.user-info{
-    color: #000;
-    padding-left: 10rem;
 
-
-}
 
 .btn-logout button{
     padding: 10px;
@@ -417,6 +458,30 @@ h1.title{
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
+a.btn.add-address-btn{
+    margin: 1rem;
+}
+
+.btn{
+    color: #000;
+    border-radius: 20px;
+    border: 2px solid black;
+    padding: 0.5rem;
+    background-color: #f0ad4e;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn:hover{
+    background-color: var(--primary_color);
+    color: var(--white_color);
+}
+
+.hide{
+    /* visibility: hidden;     */
+    display: none;
+}
+
 /* My Account */
 /* Login Page  */
 .center-container {
@@ -484,6 +549,443 @@ ul {
 
 
 
+/* Order Review Start  */
+.review-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .order-review {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+.order-review table{
+    border: 2px solid black;
+}
+.order-review thead tr {
+    border: 2px solid black;
+}
+
+.order-review tbody tr {
+    border: 2px solid rgba(0,0,0,0.6);
+} 
+
+
+
+  .order-review th,
+  .order-review td {
+    border: 1px solid rgba(0,0,0,0.3);
+    padding: 10px;
+  }
+  
+  .order-review th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .order-review td {
+    text-align: center;
+  }
+  
+  .total_cost {
+    margin-top: 20px;
+    /* text-align: right; */
+  }
+
+  .form-container{
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 10rem;
+    padding: 20px;
+    border-radius: 20px;
+    border: 2px solid black;
+    font-family: var(--ubuntu);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form-container h1{
+    text-align: center;
+    font-family: var(--righteous);
+
+  }
+
+  .form-container form {
+    width: 100%; /* Form takes full width of the container */
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+.form-container form div {
+    width: 80%; /* Adjust the width of each form field */
+    margin-bottom: 10px; /* Space between fields */
+}
+
+.form-address{
+    border: 1px solid rgba(0,0,0,0.6);
+    padding-left: 1rem;
+    padding-top: 1rem;
+    border-radius: 20px;
+  }
+
+  form {
+    margin-top: 20px;
+  }
+  
+  form div {
+    margin-bottom: 10px;
+  }
+  
+  form label {
+    font-weight: bold;
+  }
+  form p.heading{
+    font-weight: bold;
+
+  }
+  .info {
+    margin-top: 20px;
+    width: auto;
+    margin: 1rem;
+    text-align: center;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 10px;
+  }
+  
+  .info a {
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  .info a:hover {
+    text-decoration: underline;
+  }
+
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="number"],
+  form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid rgba(0,0,0,0.6);
+    border-radius: 20px; /* Rounded edges */
+  }
+  
+  form input[type="text"]:focus,
+  form input[type="email"]:focus,
+  form input[type="number"]:focus,
+  form textarea:focus {
+    outline: none;
+    border-color: #4CAF50;
+  }
+  
+  form button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px; /* Rounded edges */
+    cursor: pointer;
+  }
+  
+  form button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+
+  .form-container form button{
+    align-items: center;
+  }
+
+
+  .submit-btn {
+    margin-top: 20px; /* Optional: Add space above the button */
+    padding: 10px 20px; /* Optional: Adjust padding as needed */
+    background-color: #4CAF50; /* Example: Green background */
+    color: white; /* Example: White text */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    font-size: 16px; /* Example: Increase font size */
+}
+
+/* form styling end  */
+/* ????????????????????????????????????????? */
+
+/* Container for Account Page */
+.account-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Styling */
+.account-title {
+    padding-top: 100px;
+    font-size: 28px;
+    color: black;
+    text-align: center;
+}
+
+.user-info {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+}
+
+/* Message Styling */
+.message {
+    padding: 10px 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.success-message {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+/* Profile Section */
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    border-radius: 20px;
+    border: 2px solid black;
+    padding: 1rem;
+}
+
+
+.address-section{
+    border-radius: 20px;
+    border: 2px solid black;
+    padding: 1rem;
+}
+.address{
+    border-radius: 20px;
+    border: 2px solid black;
+    margin: 1rem;
+    padding: 1rem;
+
+}
+.profile-section h2{
+    font-size: 24px;
+}
+.profile-details p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+/* .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #45a049;
+} */
+
+.edit-profile-btn {
+    margin-top: 20px;
+    background-color: #f0ad4e;
+}
+
+.edit-profile-btn:hover {
+    background-color: #ec971f;
+}
+
+.add-address-btn {
+    margin-top: 10px;
+}
+
+.save-profile-btn {
+    background-color: #337ab7;
+}
+
+.save-profile-btn:hover {
+    background-color: #286090;
+}
+
+/* Forms */
+form {
+    margin-top: 20px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="number"],
+form input[type="password"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Address Section */
+.address-section {
+    margin-bottom: 40px;
+}
+
+.add-address-form-btn {
+    background-color: #5bc0de;
+}
+
+.add-address-form-btn:hover {
+    background-color: #31b0d5;
+}
+
+/* Order History */
+/* .order-history {
+    margin-top: 40px;
+}
+
+.order-history-title {
+    text-decoration: none;
+    color: #333;
+}
+
+.order-history-title h2 {
+    font-size: 24px;
+    color: #4CAF50;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.order-table th, .order-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.order-table th {
+    background-color: #f2f2f2;
+}
+
+.order-table td a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+.order-table td a:hover {
+    text-decoration: underline;
+} */
+
+.no-orders {
+    text-align: center;
+    color: #888;
+    margin-top: 20px;
+}
+
+/* Logout Button */
+.logout-form {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.logout-btn {
+    background-color: #d9534f;
+}
+
+.logout-btn:hover {
+    background-color: #c9302c;
+}
+
+
+
+/* ????????????????????????????????????????? */
+
+
+
+/* Order History Start  */
+/* Basic table styling */
+.order-table {
+    width: 60%;
+    margin-left: 20rem;
+    border-collapse: collapse;
+    margin-top: 20px; /* Example margin for spacing */
+}
+
+.order-table th, .order-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #dddddd;
+}
+
+/* Styling for table header */
+.order-table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+/* Alternate row background color */
+.order-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Link styling for Order ID */
+.order-table a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.order-table a:hover {
+    text-decoration: underline;
+}
+
+/* Center align Sl. No. column */
+.order-table td:first-child {
+    text-align: center;
+}
+
+/* Center align Total Item(s) column */
+.order-table td:nth-child(3) {
+    text-align: center;
+}
+
+/* Right align Total Price column */
+.order-table td:nth-child(4) {
+    text-align: right;
+}
+
+/* No orders found message */
+.order-table tbody tr td[colspan="4"] {
+    text-align: center;
+    font-style: italic;
+    color: #999;
+}
+/* Order History End  */
+
+/* Order details start  */
+.billing-details{
+    border: 2 px solid black;
+    background-color: var(--white_color);
+    
+}
+
+/* Order details end  */
+
+
 
 /* ######### RESPONSIVE CSS ########## */
 /* Medium devices (landscape tablets, 768px and up) */
@@ -538,7 +1040,7 @@ ul {
         padding: 0 40px;
     }
     
-    .btn{
+    .header-btn{
         display: block;
     }
     .navbar nav{

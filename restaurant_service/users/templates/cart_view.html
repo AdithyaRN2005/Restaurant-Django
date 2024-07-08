@@ -19,12 +19,16 @@
             </div>
 
         {% endfor %}
+            <div class="total_cost">
+            <strong>Total Cost: </strong> Rs.{{cart.get_total_cost}}/-
+            </div>
+            <a href="{% url 'buy_now' %}" class="buynow-btn">Buy Now</a>
+
         {% else %}
             <p class="cart-text">You have no items in your cart!!!</p>
+            <a href="{% url 'menu' %}" class="menu-btn">Go to Menu</a>
         {% endif %}
 
-    <div class="total_cost">
-    <strong>Total Cost: </strong> Rs.{{cart.get_total_cost}}/-
-</div>
+    
 </div>
 {% endblock %}

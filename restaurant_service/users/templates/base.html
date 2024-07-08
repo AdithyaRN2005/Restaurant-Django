@@ -19,21 +19,21 @@
                     <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" alt="logo"></a>
                 </div>
                 <nav>
-                    <div class="btn">
+                    <div class="header-btn">
                         <i class="fas fa-times close-btn"></i>
                     </div>
                     <li><a href="{% url 'home' %}">Home</a></li>
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="{% url 'menu' %}">Menu</a></li>
-                    <li><a href="{% url 'cart_view' %}">My Cart</a></li>
+                    <li><a href="{% url 'cart_view' %}">My Cart({{cart|length}})</a></li>
                     {% if request.user.is_authenticated %}
                     <li><a href="{% url 'myaccount' %}">My account</a></li>
                     {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="http://127.0.0.1:8000/admin">Login</a></li>
                     {% endif %}
     
                 </nav>
-                <div class="btn">
+                <div class="header-btn">
                     <i class="fas fa-bars menu-btn"></i>
                 </div>
             </div>

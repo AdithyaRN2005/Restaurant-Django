@@ -17,7 +17,7 @@ class Cart(object):
             self.cart[str(p)]['item'] = Item.objects.get(pk=p)
 
         for item in self.cart.values():
-            item['total_price'] = int(item['item'].price*item['quantity'])/100
+            item['total_price'] = int(item['item'].price*item['quantity'])
             yield item
 
     def __len__(self):
@@ -34,7 +34,7 @@ class Cart(object):
 
         if update_quantity:
             self.cart[item_id]['quantity']+= int(quantity)
-
+            print(self.cart[item_id]['quantity'])
             if self.cart[item_id]['quantity']==0:
                 self.remove(item_id)
         self.save()
@@ -43,9 +43,19 @@ class Cart(object):
         if item_id in self.cart:
             del self.cart[item_id]
             self.save()
+    
+    
+    def clear(self):
+        del self.session[settings.CART_SESSION_ID]
+        self.session.modified=True
+        
 
     def get_total_cost(self):
         for p in self.cart.keys():
             self.cart[str(p)]['item'] = Item.objects.get(pk=p)
         return int(sum(item['item'].price * item['quantity'] for item in self.cart.values()))
     
+    def get_cart_items_id(self):
+        item_ids = self.cart.keys()
+        items = Item.objects.filter(pk__in=item_ids)
+        return item_ids
