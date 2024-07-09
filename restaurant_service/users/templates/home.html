@@ -10,7 +10,7 @@
             <div class="content">
                 <h2>Fast and yummy.</h2>
                 <h3>Good for your tummy.</h3>
-                <div class="cta-container">
+                <div class="btn-container">
                     {% if request.user.is_authenticated %}
                     <li><a href="{% url 'menu' %}" class="menu-btn">View Menu</a></li>
                     {% else %}
@@ -24,4 +24,4 @@
     </main>
 
 
-    <!-- home Close -->{% endblock %}
+ {% endblock %}

@@ -9,6 +9,7 @@ from .cart import Cart
 from .forms import CheckOutForm, EditProfileForm, AddAddressForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 
 
@@ -53,37 +54,64 @@ def signup(request):
         'form': form
     })
 
+
+
+
 @login_required
 def myaccount(request):
-    user=UserProfile.objects.get(user=request.user)
+    user = UserProfile.objects.get(user=request.user)
     addresses = Address.objects.filter(user_profile=request.user)
-    order_records = Order.objects.filter(purchased_by=request.user)[:3]
+    order_records = Order.objects.filter(purchased_by=request.user).prefetch_related('order_items__item')[:3]
+    edit_prof_form = EditProfileForm(instance=user)
+    add_address_form = AddAddressForm()
+    # success_message = "Profile Updated Successfully"
+    order_id = request.GET.get('order_id')
+    order = get_object_or_404(Order, id=order_id) if order_id else None
+
 
     if request.method == 'POST':
-        edit_prof_form = EditProfileForm(request.POST, instance=user)
-        if edit_prof_form.is_valid():
-            edit_prof_form.save()
-            return render(request, 'myaccount.html', {
-                'user': user,
-                'addresses':addresses,
-                'order_records':order_records,
-                'edit_prof_form': edit_prof_form,
-                'success_message': 'Your profile has been updated successfully.'
-            })
+        if 'edit_profile' in request.POST:
+            edit_prof_form = EditProfileForm(request.POST, instance=user)
+            if edit_prof_form.is_valid():
+                edit_prof_form.save()
+                messages.success(request, 'Profile Updated successfully!')
+
+                return redirect('myaccount')  
+            else:
+                print("Edit Profile Form errors:", edit_prof_form.errors)
+                for field, errors in edit_prof_form.errors.items():
+                    for error in errors:
+                        messages.error(request, f"{field.capitalize()}: {error}")
+        elif 'add_address' in request.POST:
+            add_address_form = AddAddressForm(request.POST)
+            if add_address_form.is_valid():
+                address = add_address_form.save(commit=False)
+                address.user_profile = request.user
+                address.save()                
+                messages.success(request, 'Address added successfully!')
+                return redirect('myaccount')  
+            else:
+                print("Add AddressForm errors:", add_address_form.errors)
+                for field, errors in add_address_form.errors.items():
+                    for error in errors:
+                        messages.error(request, f"{field.capitalize()}: {error}")
+
+        elif 'delete_address' in request.POST:
+            address_id = request.POST.get('delete_address')
+            address = get_object_or_404(Address, id=address_id, user_profile=request.user)
+            address.delete()
+            return redirect('myaccount') 
         else:
-            print("Form errors:", edit_prof_form.errors)
-        # If form is not valid, handle errors (e.g., display errors in the form)
-    else:
-        edit_prof_form = EditProfileForm(instance=user)
-    for address in addresses:
-        print(address)
+            print("Unhandled POST request:", request.POST)  # Log unexpected POST requests
+
     return render(request, 'myaccount.html', {
         'user': user,
-        'addresses':addresses,
-        'order_records':order_records,
+        'order': order,
+        'addresses': addresses,
+        'order_records': order_records,
         'edit_prof_form': edit_prof_form,
+        'add_address_form': add_address_form,
     })
-
 
 def search(request):
     query = request.GET.get('query', '')
@@ -124,11 +152,13 @@ def remove_from_cart(request, product_id):
     cart.remove(str(product_id))
     return redirect('cart_view')
 
-def buy_now(request,address_id=1):
-    cart = Cart(request)
-    user=UserProfile.objects.get(user=request.user)
-    order_records = Order.objects.filter(purchased_by=request.user)[:3]
 
+
+def buy_now(request, address_id=1):
+    cart = Cart(request)
+    user = UserProfile.objects.get(user=request.user)
+    addresses = Address.objects.filter(user_profile=request.user)
+    order_records = Order.objects.filter(purchased_by=request.user)[:3]
 
     if request.method == 'POST':
         form = CheckOutForm(request.POST, instance=user, user=request.user)
@@ -137,13 +167,23 @@ def buy_now(request,address_id=1):
             total_bill = cart.get_total_cost()
             address_id = form.cleaned_data['address_id'].id
             user_address = Address.objects.get(pk=address_id)
+
             order = Order.objects.create(
                 purchased_by=request.user,
                 purchased_at=timezone.now(),
                 email=user.email,
-                address=user_address,
+                address_name=user_address.name,
+                address_type=user_address.type,
+                address_housename=user_address.housename,
+                address_place=user_address.place,
+                address_postoffice=user_address.postoffice,
+                address_pincode=user_address.pincode,
+                address_district=user_address.district,
+                address_state=user_address.state,
+                address_mob=user_address.mob,
                 total_bill=total_bill,
             )
+
             for item in cart:
                 OrderItem.objects.create(
                     order=order,
@@ -151,63 +191,35 @@ def buy_now(request,address_id=1):
                     price=item['item'].price,  
                     quantity=item['quantity']
                 )
+                order.item.add(item['item'])
+
 
             cart.clear()
 
-            return render(request, 'myaccount.html', {
-                'order': order,
-                'user': user,
-                'order_records':order_records,
-            })
+            # return redirect('myaccount')
+            return redirect(reverse('myaccount') + f'?order_id={order.id}')
+      
+
     else:
         form = CheckOutForm(instance=user)
 
-    return render(request,'buynow.html',{
-            'cart':cart,
-            'user':user,
-            'form':form,
-            'addresses': Address.objects.filter(user_profile=request.user)
-
-    })
-
-@login_required
-def add_address(request):
-    user = UserProfile.objects.get(user=request.user)
-    order_records = Order.objects.filter(purchased_by=request.user)[:3]
-
-    if request.method == 'POST':
-        add_address_form = AddAddressForm(request.POST)
-        if add_address_form.is_valid():
-            address = add_address_form.save(commit=False)
-            address.user_profile = request.user  # Associate the address with the user profile
-            address.save()
-            return render(request,'myaccount.html',{
-                'user':user,
-                'order_records':order_records,
-                'addresses': Address.objects.filter(user_profile=request.user)
-            })
-        else:
-            print("Form errors:", add_address_form.errors)
-    else:
-        add_address_form = AddAddressForm()
-
-    return render(request, 'myaccount.html', {
-        'add_address_form': add_address_form,
+    return render(request, 'buynow.html', {
+        'cart': cart,
         'user': user,
-        'order_records':order_records,
-        'addresses': Address.objects.filter(user_profile=request.user)
-
+        'form': form,
+        'addresses': Address.objects.filter(user_profile=request.user),
     })
+
+
 
 def order_history(request):
-    order_records = Order.objects.filter(purchased_by=request.user)
+
+    order_records = Order.objects.filter(purchased_by=request.user).prefetch_related('order_items__item')
     return render(request,'order_history.html',{
         'order_records':order_records,
-
-    })
+        })
 
 def order_details(request,order_id):
-    # order_details=get_object_or_404(OrderItem,pk=order_id)
     order_details = OrderItem.objects.filter(order=order_id)
 
     print(order_details)

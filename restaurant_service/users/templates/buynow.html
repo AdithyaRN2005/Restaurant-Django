@@ -29,10 +29,17 @@
         <div class="total_cost">
             <strong>Total Amount: </strong> Rs.{{cart.get_total_cost}}/-
         </div>
+        <div class="edit-btn-container">
+        <div class="btn edit-order">
+            <a href="{% url 'cart_view' %}" >Edit Order</a>
+        </div>
+        <button type="button" class="btn confirm-order-btn">Buy Now</button>
+
+        </div>
 </div>
 <div class="form-container">
-    <h1>Billing Details</h1>
-    <form method="post" action=".">
+    <form method="post" id="BillForm" action=".">
+        <h1>Billing Details</h1>
         {% csrf_token %}
         {{ form.non_field_errors }}
         <div>

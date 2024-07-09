@@ -3,14 +3,15 @@
 {% block title %}Order History{% endblock %}
 
 {% block content %}
+<div class="order-history">
     <h1 class="title">Order History</h1>
     
-    <table class="order-table">
+    <table class="order-review">
         <thead>
             <tr>
                 <th>Sl. No.</th>
                 <th>Order ID</th>
-                <th>Total Item(s)</th>
+                <th>Item(s)</th>
                 <th>Total Price</th>
             </tr>
         </thead>
@@ -19,8 +20,13 @@
                 {% for order in order_records %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td><a href="{% url 'order_details' order.id %}">{{ order.id }}</a></td>
-                        <td>{{ order.items.count }}</td>
+                        <td><a href="{% url 'order_details' order.id %}">#{{ order.id }}</a></td>
+                        <td>
+                            {% for order_item in order.order_items.all %}
+                                {{ order_item.item.title }} ({{ order_item.quantity }})
+                                {% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
                         <td>{{ order.total_bill }}</td>
                     </tr>
                 {% endfor %}
@@ -31,4 +37,5 @@
             {% endif %}
         </tbody>
     </table>
+</div>
 {% endblock %}

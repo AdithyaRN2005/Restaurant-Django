@@ -31,6 +31,10 @@ class Cart(object):
 
         if item_id not in self.cart:
             self.cart[item_id] = {'quantity':quantity, 'id':item_id}
+        elif item_id in self.cart and not update_quantity:
+            self.cart[item_id]['quantity']+= int(quantity)
+
+
 
         if update_quantity:
             self.cart[item_id]['quantity']+= int(quantity)

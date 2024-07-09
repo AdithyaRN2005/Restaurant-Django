@@ -5,14 +5,21 @@
 {% block content %}
 <div class="account-container">
     <h1 class="account-title">My Account</h1>
-    <h1 class="user-info">Welcome, {{ user.user }}</h1>
+    <h1 class="user-info">Welcome, {{ user.user }}!</h1>
 
     {% if success_message %}
         <div class="message success-message">{{ success_message }}</div>
     {% endif %}
+    {% if messages %}
+        {% for message in messages %}
+        <div class="message success-message">{{ message }}</div>
+
+        {% endfor %}
+
+    {% endif %}
 
     {% if order %}
-        <div class="order-info">
+        <div class="message success-message order-info">
             Thank you for shopping. 
             <p><strong>Order ID:</strong> {{ order.id }}</p>
             <p><strong>Bill Amount:</strong> {{ order.total_bill }}</p>
@@ -29,12 +36,24 @@
             <p><strong>Phone:</strong> {{ user.phone }}</p>
             <p><strong>Email:</strong> {{ user.email }}</p>
             <button type="button" class="btn edit-profile-btn">Edit Profile</button>
+
         </div>
+        {% if edit_prof_form.errors %}
+        <div class="message error-message">
+            <ul>
+                {% for field, errors in edit_prof_form.errors.items %}
+                    {% for error in errors %}
+                        <li>{{ field.capitalize }}: {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
         
         <form id="edit-profile-form" method="POST" action=".">
             {% csrf_token %}
             {{ edit_prof_form.as_p }}
-            <button class="btn save-profile-btn" type="submit">Save</button>
+            <button type="submit" class="btn edit-profile-btn" name="edit_profile">Save Profile</button>
         </form> 
     </div>
 
@@ -50,30 +69,35 @@
             PinCode:{{address.pincode}}<br>
             District:{{address.district}},
             State:{{address.state}}<br>
-            <b>Ph: {{address.mob}}</b>
+            Ph: {{address.mob}}
+
+            <form method="POST" action="{% url 'myaccount' %}">
+                {% csrf_token %}
+                <input type="hidden" name="delete_address" value="{{ address.id }}">
+                <button type="submit" class="btn delete-address-btn">Delete</button>
+            </form>
         </div>
         {% endfor %}
         {% endif %}
-        <!-- <a href="{% url 'add-address' %}" class="btn add-address-btn">Add Address</a> -->
-        <button type="button" onclick="location.href='{% url 'add-address' %}'" class="btn add-address-form-btn">Add Address</button>
+        <button type="button" class="btn add-address-btn">Add Address</button>
+        
+        
 
-
-        <form id="add-address-form"  method="POST" action="{% url 'add-address' %}">
+        <form id="add-address-form"  method="POST" action=".">
             {% csrf_token %}
             {{ add_address_form.as_p }}
-            <button class="btn add-address-btn" type="submit">Add</button>
-            <a href="{% url 'myaccount' %}" class="btn add-address-btn">Back</a>
-
+            <button class="btn add-address-btn" type="submit" name="add_address">Add</button>
         </form> 
+
     </div>
 
-    <div class="order-history">
-        <a href="{% url 'order_history' %}" class="order-history-title"><h2>Order History</h2></a>
+    <div class="recent-orders">
+        <h2>Recent Orders</h2>
+        <!-- <a href="{% url 'order_history' %}" class="order-history-title"><h2>Order History</h2></a> -->
         {% if order_records %}
-            <table class="order-table">
+            <table class="order-review">
                 <thead>
                     <tr>
-                        <th>Sl. No.</th>
                         <th>Order ID</th>
                         <th>Total Item(s)</th>
                         <th>Total Price</th>
@@ -82,19 +106,24 @@
                 <tbody>
                     {% for order in order_records %}
                         <tr>
-                            <td>{{ forloop.counter }}</td>
                             <td><a href="{% url 'order_details' order.id %}">#{{ order.id }}</a></td>
-                            <td>{{ order.items.count }}</td>
+                            <td>
+                                {% for order_item in order.order_items.all %}
+                                    {{ order_item.item.title }} ({{ order_item.quantity }})
+                                    {% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </td>
                             <td>{{ order.total_bill }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
+            <a href="{% url 'order_history'%}" class="btn">View All Orders</a>
+
         {% else %}
             <p class="no-orders">No orders found.</p>
         {% endif %}
     </div>
-
     <form method="POST" action="{% url 'logout' %}" class="logout-form">
         {% csrf_token %}
         <button type="submit" class="btn logout-btn">Logout</button>

@@ -18,7 +18,13 @@ html{
     padding: 0;
     font-family: "poppins";
 }
-
+body {
+    background: linear-gradient(to bottom, rgba(222,196,170,255), #fabb61); /* Gradient from lighter to darker #e9ae30 */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
 
 /*------------------------- Utility Start------------------ */
 a{
@@ -59,9 +65,7 @@ a{
     text-align: center;
     color: var(--primary_color)
 }
-.error-message{
-    background: rgba(255,0,0,0.3);
-}
+
 /*------------------------- Utility End------------------ */
 
 
@@ -69,7 +73,7 @@ a{
 
 header{
     width: 100%;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.8);
     position: fixed;
     padding: 0.5rem 0;
     z-index: 100;
@@ -133,6 +137,80 @@ header{
     display: none;
 }
 /*------------------------- Header End------------------ */
+
+
+
+/* Login Form Start  */
+
+.login-form{
+    margin-top: 2rem;
+    padding: 2rem;
+    border-radius: 20px;
+    border: 2px solid var(--white_color);
+}
+.login-form .form-group label{
+    color: var(--white_color);
+    padding-left: 1rem;
+}
+.login-form .form-group input{
+    border-radius: 20px;
+}
+.login-title{
+    text-align: center;
+    font-family: var(--righteous);
+    letter-spacing: 5px;
+}
+.login-form .btn{
+    background-color: rgba(0,0,0,0.6);
+    font-weight: bold;
+    font-size: 17px;
+    transition: all 0.3s ease-in-out;
+}
+.login-form .btn:hover{
+    background-color: var(--primary_color);
+    color: #000;
+}
+
+.login-form a:hover{
+    text-decoration: underline;
+}
+
+/* Login Form End  */
+/* SignUp Form Start  */
+
+.signup-form{
+    margin-top: 7rem;
+    padding: 2rem;
+    border-radius: 20px;
+    border: 2px solid var(--white_color);
+}
+.signup-form .form-group label{
+    color: var(--white_color);
+    padding-left: 1rem;
+}
+.signup-form .form-group input{
+    border-radius: 20px;
+}
+.signup-title{
+    text-align: center;
+    font-family: var(--righteous);
+    letter-spacing: 5px;
+}
+.signup-form .btn{
+    background-color: rgba(0,0,0,0.6);
+    font-weight: bold;
+    font-size: 17px;
+    transition: all 0.3s ease-in-out;
+}
+.signup-form .btn:hover{
+    background-color: var(--primary_color);
+    color: #000;
+}
+
+.signup-form a:hover{
+    text-decoration: underline;
+}
+/* SignUp Form End  */
 /* <!-- Home Start --> */
 
 #home{
@@ -175,14 +253,14 @@ header{
 
 
 
-.cta-container {
+.btn-container {
     text-align: center;
     padding: 20px;
     position: relative;
     z-index: 10;
 }
 
-.cta-container .btn {
+.btn-container .btn {
     display: inline-block;
     padding: 5px 10px;
     background-color:rgba(0,0,0,0.6); 
@@ -195,17 +273,18 @@ header{
     cursor: pointer;
     transition: background-color 0.5s ease;
 }
-.cta-container .btn:hover{
+.btn-container .btn:hover{
     transform: scale(1.1);
+    color: #000;
 
 }
 
-.cta-container p {
+.btn-container p {
     margin-top: 10px;
     color: #fff;
 }
 
-.cta-container p a {
+.btn-container p a {
     color: #fff;
     text-decoration: underline;
 }
@@ -259,7 +338,6 @@ header{
 .menu-content {
     height: 100%;
     padding-top: 100px;
-    background: url('img/bg-menu.png') no-repeat center/cover; 
 }
 
 .menu-content h1{
@@ -267,10 +345,13 @@ header{
     font-size: 30px;
 }
 .search {
-    display: inline-block;
-    position: absolute;
-    left: 41%;
-    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    padding-bottom: 1rem;
+    padding-left: 3rem;
+    margin-bottom: 1rem;
 }
 
 .search form input{
@@ -286,12 +367,13 @@ header{
 }
 
 .btn_container{
-    margin: 4rem 0;
+    margin: 1rem;
     width: 100%;
-    display: inline-block;
+    display: flex;
     color: #000;
     text-align: center;
-    padding-top: 2rem;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn-cat{
@@ -349,23 +431,31 @@ h1.title{
 .cart_items_container{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
 }
 .cart_img_cards img{
-    width: 110px ;
-    height: 90%;
+    width: 120px ;
+    height: 88px;
     float: left;
     margin-right: 1rem;
 }
 
 .cart_img_cards p{
-    display: block;
+    font-size: 1.25rem;
+}
+
+.cart-item-details{
+    display: flex;
+    flex-direction: column;
 }
 
 .cart_img_cards{
-    margin-top: 2rem;
-    margin-left: 10%;
-    margin-right: 10%;
+  
     display: block;
+    width: 80%;
+    margin: 2rem 10rem;
     border-radius: 4px;
     border: 2px solid black;
 }
@@ -378,28 +468,49 @@ h1.title{
 .total_cost{
     text-align: center;
     margin: 3rem;
+    margin-bottom: 0;
     font-size: large;
   
 }
+.edit-order{
+    text-align: center;
+    margin: 1rem auto;
+    padding: 1rem 3rem;
+    width: fit-content;
+    font-size: 17px;
+}
+.btn.edit-order a{
+    color: #000;
+    transition: all 0.3s ease-in-out;
+}
+.btn.edit-order a:hover{
+    color: var(--white_color);
+}
+
+.edit-btn-container .btn{
+    padding: 0.5rem 2rem;
+    font-size: 17px;
+
+}
 .cart-text{
+    font-family: var(--ubuntu);
     font-size: 20px;
     margin-left: 5rem;
 }
+.go-to-menu{
+    margin: 3rem;
+}
 
 .main-content {
-    background: url('img/bg-menu.png') center/cover; 
     height: 100vh;
 
     justify-content: center;
     align-items: center;
-    /* background-color: var(--primary_color);
-    min-height: 100vh;
-    position: relative;
-     z-index: -10; */
+
 }
 
 .menu-btn{
-    width: 80px;
+    width: auto;
     padding: 10px;
     margin-left: 10rem;
     font-size: 1em;
@@ -413,7 +524,7 @@ h1.title{
 }
 #home .menu-btn{
     margin: 0;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.1s ease-in-out;
 
 }
 
@@ -428,11 +539,10 @@ h1.title{
 
 
 .buynow-btn{
-    width: 80px;
+    width: auto;
     text-align: center;
-
+    margin: 2rem 1rem;
     padding: 10px;
-    margin-left: 45%;
     font-size: 1em;
     color: #fff;
     background-color: rgba(0,0,0,0.6);
@@ -465,6 +575,7 @@ a.btn.add-address-btn{
 
 .btn{
     color: #000;
+    font-weight: bold;
     border-radius: 20px;
     border: 2px solid black;
     padding: 0.5rem;
@@ -478,10 +589,29 @@ a.btn.add-address-btn{
 }
 
 .hide{
-    /* visibility: hidden;     */
     display: none;
 }
+button.btn.delete-address-btn{
+    background-color: red;
+    color: var(--white_color);
+}
+button.btn.delete-address-btn:hover{
+    background-color: white;
+    color: red;
+}
 
+.recent-orders{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.recent-orders a.btn{
+    float: right;
+    margin: 2rem;
+}
 /* My Account */
 /* Login Page  */
 .center-container {
@@ -542,9 +672,9 @@ color: var(--primary_color);
     color: var(--white_color);
     }
 ul {
-    list-style-type: square; /* Bullet style */
-    color: #ffffff; /* Bullet color */
-    padding-left: 20px; /* Adjust the padding for indentation */
+    list-style-type: square; 
+    color: #ffffff; 
+    padding-left: 20px; 
 }
 
 
@@ -554,9 +684,13 @@ ul {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
   
-  .order-review {
+.order-review {
     width: 100%;
     border-collapse: collapse;
   }
@@ -572,42 +706,66 @@ ul {
     border: 2px solid rgba(0,0,0,0.6);
 } 
 
+.order-review thead{
+    background-color: rgba(0,0,0,0.6);
+    color: var(--white_color);
+    font-weight: bold;
+    letter-spacing: 0.3rem;
+    font-family: var(--righteous);
+}
 
+  .order-review th{
+    border: 1px solid rgba(0,0,0,0.3);
+    padding: 10px;
+    font-family: var(--righteous);
 
-  .order-review th,
+  }
   .order-review td {
     border: 1px solid rgba(0,0,0,0.3);
     padding: 10px;
+    font-family: var(--ubuntu);
+
   }
-  
-  .order-review th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-  }
+ 
   
   .order-review td {
     text-align: center;
   }
-  
-  .total_cost {
-    margin-top: 20px;
-    /* text-align: right; */
-  }
 
+  .order-history, .order-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 7rem;
+}
+ .order-history table.order-review{
+    margin: 1rem 2rem;
+  }
   .form-container{
     max-width: 400px;
     margin: 0 auto;
+    margin-top: 5rem;
     margin-bottom: 10rem;
     padding: 20px;
-    border-radius: 20px;
-    border: 2px solid black;
+
     font-family: var(--ubuntu);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
+  .edit-btn-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
+  #BillForm{
+    border-radius: 20px;
+    border: 2px solid black;
+  }
   .form-container h1{
     text-align: center;
     font-family: var(--righteous);
@@ -621,8 +779,8 @@ ul {
     align-items: center; 
 }
 .form-container form div {
-    width: 80%; /* Adjust the width of each form field */
-    margin-bottom: 10px; /* Space between fields */
+    width: 80%; 
+    margin-bottom: 10px; 
 }
 
 .form-address{
@@ -673,7 +831,7 @@ ul {
     width: 100%;
     padding: 8px;
     border: 1px solid rgba(0,0,0,0.6);
-    border-radius: 20px; /* Rounded edges */
+    border-radius: 20px; 
   }
   
   form input[type="text"]:focus,
@@ -689,7 +847,7 @@ ul {
     color: white;
     padding: 10px 20px;
     border: none;
-    border-radius: 20px; /* Rounded edges */
+    border-radius: 20px; 
     cursor: pointer;
   }
   
@@ -703,26 +861,23 @@ ul {
 
 
   .submit-btn {
-    margin-top: 20px; /* Optional: Add space above the button */
-    padding: 10px 20px; /* Optional: Adjust padding as needed */
-    background-color: #4CAF50; /* Example: Green background */
-    color: white; /* Example: White text */
-    border: none; /* Remove default border */
-    border-radius: 5px; /* Optional: Add rounded corners */
-    cursor: pointer; /* Change cursor on hover */
-    font-size: 16px; /* Example: Increase font size */
+    margin-top: 20px; 
+    padding: 10px 20px; 
+    background-color: #4CAF50;
+    color: white; 
+    border: none;
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
 }
 
 /* form styling end  */
-/* ????????????????????????????????????????? */
 
 /* Container for Account Page */
 .account-container {
     max-width: 900px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Title Styling */
@@ -732,11 +887,14 @@ ul {
     color: black;
     text-align: center;
 }
-
+hr{
+    border-color: #000;
+}
 .user-info {
     text-align: center;
     font-size: 18px;
-    color: #555;
+    color: rgba(0,0,0,0.8);
+    padding: 2rem 0 0 0;
 }
 
 /* Message Styling */
@@ -747,10 +905,14 @@ ul {
 }
 
 .success-message {
-    background-color: #dff0d8;
-    color: #3c763d;
+    background-color: rgba(0,255,0,0.3);;
+    color: #000;
+    font-weight: bold;
 }
-
+.error-message{
+    background: rgba(255,0,0,0.6);
+    color: var(--white_color);
+}
 /* Profile Section */
 .profile-section {
     display: flex;
@@ -783,21 +945,6 @@ ul {
     margin: 10px 0;
     font-size: 16px;
 }
-
-/* .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    color: #fff;
-    background-color: #4CAF50;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background-color: #45a049;
-} */
 
 .edit-profile-btn {
     margin-top: 20px;
@@ -838,6 +985,8 @@ form textarea {
     border-radius: 4px;
 }
 
+
+
 /* Address Section */
 .address-section {
     margin-bottom: 40px;
@@ -851,49 +1000,21 @@ form textarea {
     background-color: #31b0d5;
 }
 
-/* Order History */
-/* .order-history {
-    margin-top: 40px;
+.recent-orders h2{
+    font-size: 20px;
+    margin: 1rem;
+}
+.recent-orders table.order-review tbody tr td a{
+    color: #000;
+}
+.order-history table.order-review tbody tr td a{
+    color: #000;
 }
 
-.order-history-title {
-    text-decoration: none;
-    color: #333;
-}
-
-.order-history-title h2 {
-    font-size: 24px;
-    color: #4CAF50;
-}
-
-.order-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.order-table th, .order-table td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-.order-table th {
-    background-color: #f2f2f2;
-}
-
-.order-table td a {
-    color: #337ab7;
-    text-decoration: none;
-}
-
-.order-table td a:hover {
-    text-decoration: underline;
-} */
 
 .no-orders {
     text-align: center;
-    color: #888;
+    color: rgba(0,0,0,0.8);
     margin-top: 20px;
 }
 
@@ -903,17 +1024,15 @@ form textarea {
     margin-top: 40px;
 }
 
-.logout-btn {
-    background-color: #d9534f;
+button.btn.logout-btn {
+    background-color: rgba(255,0,0,0.8);
+    color: #000;
 }
 
-.logout-btn:hover {
-    background-color: #c9302c;
+button.btn.logout-btn:hover {
+    background-color: #f00;
+    color: var(--white_color);
 }
-
-
-
-/* ????????????????????????????????????????? */
 
 
 
@@ -923,7 +1042,7 @@ form textarea {
     width: 60%;
     margin-left: 20rem;
     border-collapse: collapse;
-    margin-top: 20px; /* Example margin for spacing */
+    margin-top: 20px; 
 }
 
 .order-table th, .order-table td {
@@ -932,18 +1051,15 @@ form textarea {
     border: 1px solid #dddddd;
 }
 
-/* Styling for table header */
 .order-table th {
     background-color: #f2f2f2;
     color: #333;
 }
 
-/* Alternate row background color */
 .order-table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-/* Link styling for Order ID */
 .order-table a {
     color: #007bff;
     text-decoration: none;
@@ -953,22 +1069,18 @@ form textarea {
     text-decoration: underline;
 }
 
-/* Center align Sl. No. column */
 .order-table td:first-child {
     text-align: center;
 }
 
-/* Center align Total Item(s) column */
 .order-table td:nth-child(3) {
     text-align: center;
 }
 
-/* Right align Total Price column */
 .order-table td:nth-child(4) {
     text-align: right;
 }
 
-/* No orders found message */
 .order-table tbody tr td[colspan="4"] {
     text-align: center;
     font-style: italic;
@@ -978,10 +1090,14 @@ form textarea {
 
 /* Order details start  */
 .billing-details{
-    border: 2 px solid black;
-    background-color: var(--white_color);
-    
+    margin: 2rem 1rem;
+    border-radius: 20px;
+    border: 2px solid black;
+    padding: 2rem;
+    font-size: 17px;
 }
+
+
 
 /* Order details end  */
 
@@ -997,10 +1113,6 @@ form textarea {
         font-size: 2rem;
     }
 
-    .search{
-        position: absolute;
-        left: 37%;
-    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -1013,10 +1125,6 @@ form textarea {
         font-size: 1.5rem;
     }
 
-    .search{
-        position: absolute;
-        left: 37%;
-    }
     h1.title{
         font-size: 25px;
     }
@@ -1075,24 +1183,25 @@ form textarea {
         margin: 25px;
     }
 
+
+    .menu_items_container{
+        grid-template-columns: repeat(1,1fr);
+    }
+
     .search{
-        position: absolute;
-        left: 26%;
-        width: 70%;
+        /* width: 250px; */
+        display: flex;
+        justify-content: center;
+        align-self: center;
+        padding-left: 8rem;
     }
     .search form input{
         width: 50%;
     }
     
-    .search form button{
-        width: 32%;
+    .buynow-btn {
+        font-size: 0.7em;
     }
-
-    .menu_items_container{
-        grid-template-columns: repeat(1,1fr);
-    }
-    
-    
 
 }
 

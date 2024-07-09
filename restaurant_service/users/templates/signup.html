@@ -3,8 +3,8 @@
 {% block content %}
 <div class="center-container">
 
-    <h1 class="title">SignUp</h1>
-    <form method="POST" action=".">
+    <!-- <h1 class="title">SignUp</h1> -->
+    <!-- <form method="POST" action=".">
         {% csrf_token %}
         {{form.as_p}}
         {% if messages %}
@@ -13,8 +13,36 @@
                 {{message}}
             </div>
         {% endfor %}
-    {% endif %}
-        <button>SignUp</button>
+    {% endif %} -->
+    <form method="POST" class="signup-form" action=".">
+        <h1 class="signup-title">SignUp</h1>
+
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_username">Username:</label>
+            {{ form.username }}
+            {% for error in form.username.errors %}
+            <div class="message error-message">{{ error }}</div>
+            {% endfor %}
+        </div>
+        
+        <div class="form-group">
+            <label for="id_password1">Password:</label>
+            {{ form.password1 }}
+            {% for error in form.password1.errors %}
+            <div class="message error-message">{{ error }}</div>
+            {% endfor %}
+        </div>
+        
+        <div class="form-group">
+            <label for="id_password2">Confirm Password:</label>
+            {{ form.password2 }}
+            {% for error in form.password2.errors %}
+            <div class="message error-message">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
         <p class="text">Already registered user? <a href="{% url 'login' %}">Click here!</a></p>
 
     </form> 

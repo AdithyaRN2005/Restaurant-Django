@@ -3,6 +3,7 @@
 {% block title %}Order History{% endblock %}
 
 {% block content %}
+    <div class="order-details">
     <h1 class="title">Order Details</h1>
     {% if order_details %}
     <table class="order-review">
@@ -33,12 +34,16 @@
 
         <p><strong>Purchased By: </strong> {{item.order.purchased_by}}</p>
         <p><strong>Purchased At: </strong> {{item.order.purchased_at}}</p>
-        <p><strong>Address: </strong> {{item.order.address}}</p>
+        <p><strong>Address: </strong> {{item.order.address_name}},
+            {{item.order.address_housename}},{{item.order.address_place}},{{item.order.address_postoffice}},
+            PIN:{{item.order.address_pincode}}, DT:{{item.order.address_district}},
+            Mob:{{item.order.address_mob}},
+             Email:{{item.order.email}}</p>
         <p><strong>Phone: </strong> {{item.order.purchased_by}}</p>
         <p><strong>Email: </strong> {{item.order.purchased_by}}</p>
         {% endwith %}
 
     </div>
     {% endif %}
-
+</div>
 {% endblock %}

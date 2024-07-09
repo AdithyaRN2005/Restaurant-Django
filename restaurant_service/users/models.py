@@ -80,14 +80,40 @@ class Address(models.Model):
         return f"{self.name}, {self.housename},{self.place}"
 
 
-class Order(models.Model):
-    item = models.ManyToManyField(Item,related_name='orders')
-    total_bill = models.IntegerField()
-    purchased_by = models.ForeignKey(User, related_name='orders',on_delete=models.SET_NULL,blank=True, null=True)
-    purchased_at = models.DateTimeField(auto_now_add=True)
-    address = models.ForeignKey(Address,on_delete=models.DO_NOTHING,blank=True, null=True)
-    email = models.EmailField(null=True)
+# class Order(models.Model):
+#     item = models.ManyToManyField(Item,related_name='orders')
+#     total_bill = models.IntegerField()
+#     purchased_by = models.ForeignKey(User, related_name='orders',on_delete=models.SET_NULL,blank=True, null=True)
+#     purchased_at = models.DateTimeField(auto_now_add=True)
+#     address = models.ForeignKey(Address,on_delete=models.DO_NOTHING,blank=True, null=True)
+#     email = models.EmailField(null=True)
     
+#     class Meta:
+#         ordering = ['-purchased_at']
+        
+#     def __str__(self):
+#         return f"Order #{self.id}"
+
+#     def calculate_total_bill(self):
+#         self.total_bill = sum(order_item.item.price * order_item.quantity for order_item in self.orderitem_set.all())
+#         self.save()
+
+class Order(models.Model):
+    item = models.ManyToManyField(Item, related_name='orders')
+    total_bill = models.IntegerField()
+    purchased_by = models.ForeignKey(User, related_name='orders', on_delete=models.SET_NULL, blank=True, null=True)
+    purchased_at = models.DateTimeField(auto_now_add=True)
+    address_name = models.CharField(max_length=50, default='Unknown Name')
+    address_type = models.CharField(max_length=50, choices=TYPE_CHOICES, default=HOME)
+    address_housename = models.CharField(max_length=50, default='Unknown Housename')
+    address_place = models.CharField(max_length=50, default='Unknown Place')
+    address_postoffice = models.CharField(max_length=50, default='Unknown Postoffice')
+    address_pincode = models.CharField(max_length=50, default='000000')
+    address_district = models.CharField(max_length=50, default='Unknown District')
+    address_state = models.CharField(max_length=50, default='Unknown State')
+    address_mob = models.CharField(max_length=50, default='0000000000')
+    email = models.EmailField(null=True)
+
     class Meta:
         ordering = ['-purchased_at']
         
@@ -97,8 +123,10 @@ class Order(models.Model):
     def calculate_total_bill(self):
         self.total_bill = sum(order_item.item.price * order_item.quantity for order_item in self.orderitem_set.all())
         self.save()
+
+
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, related_name='order', on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, related_name='order_items', on_delete=models.CASCADE)
     item = models.ForeignKey(Item, related_name='items', on_delete=models.CASCADE)
     price = models.IntegerField()
     quantity = models.IntegerField(default=1)
