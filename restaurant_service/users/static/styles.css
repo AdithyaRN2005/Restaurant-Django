@@ -366,6 +366,9 @@ header{
     border: 2px solid black;
 }
 
+.search-results h2{
+    margin: 3rem;
+}
 .btn_container{
     margin: 1rem;
     width: 100%;

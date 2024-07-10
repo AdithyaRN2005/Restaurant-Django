@@ -157,7 +157,9 @@ def remove_from_cart(request, product_id):
 def buy_now(request, address_id=1):
     cart = Cart(request)
     user = UserProfile.objects.get(user=request.user)
+
     addresses = Address.objects.filter(user_profile=request.user)
+
     order_records = Order.objects.filter(purchased_by=request.user)[:3]
 
     if request.method == 'POST':
@@ -195,13 +197,13 @@ def buy_now(request, address_id=1):
 
 
             cart.clear()
-
-            # return redirect('myaccount')
             return redirect(reverse('myaccount') + f'?order_id={order.id}')
       
 
     else:
         form = CheckOutForm(instance=user)
+        form.fields['address_id'].queryset = addresses
+
 
     return render(request, 'buynow.html', {
         'cart': cart,

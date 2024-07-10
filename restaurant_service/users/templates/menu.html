@@ -23,9 +23,6 @@
                 <p class="title">{{ item.title }}</p>
                 <p class="price">Rs. {{ item.price }}/-</p>
                 <a href="{% url 'add_to_cart' item.id %}">Add to Cart</a>
-
-
-
             </div>
         {% endfor %} 
     </div>
